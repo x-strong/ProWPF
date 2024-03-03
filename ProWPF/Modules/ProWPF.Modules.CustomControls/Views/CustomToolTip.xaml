@@ -1,0 +1,109 @@
+﻿<UserControl
+  x:Class="ProWPF.Modules.CustomControls.Views.CustomToolTip"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:ProWPF.Modules.CustomControls.Views"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:prism="http://prismlibrary.com/"
+  xmlns:viewmodels="clr-namespace:ProWPF.Modules.CustomControls.ViewModels"
+  d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False,
+                                   Type={x:Type viewmodels:CustomToolTipViewModel}}"
+  prism:ViewModelLocator.AutoWireViewModel="True"
+  mc:Ignorable="d">
+  <UserControl.Resources>
+    <ResourceDictionary Source="../Resources/Styles/ToolTipStyles.xaml" />
+  </UserControl.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition />
+      <RowDefinition />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition />
+      <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+
+    <StackPanel
+      Grid.Row="0"
+      Grid.RowSpan="3"
+      Grid.Column="0"
+      Orientation="Vertical">
+      <StackPanel.Resources>
+        <Style TargetType="Button">
+          <Setter Property="Margin" Value="0,10" />
+          <Setter Property="Padding" Value="10" />
+          <Setter Property="Width" Value="160" />
+        </Style>
+      </StackPanel.Resources>
+      <Button>
+        <Button.Content>ToolTip At Left</Button.Content>
+        <Button.ToolTip>
+          <ToolTip Placement="Left" Style="{StaticResource ToolTipStyle}">
+            This is a test tip.
+          </ToolTip>
+        </Button.ToolTip>
+      </Button>
+      <Button>
+        <Button.Content>ToolTip At Top</Button.Content>
+        <Button.ToolTip>
+          <ToolTip Placement="Top" Style="{StaticResource ToolTipStyle}">
+            This is a test tip.
+          </ToolTip>
+        </Button.ToolTip>
+      </Button>
+      <Button>
+        <Button.Content>ToolTip At Right</Button.Content>
+        <Button.ToolTip>
+          <ToolTip Placement="Right" Style="{StaticResource ToolTipStyle}">
+            This is a test tip.
+          </ToolTip>
+        </Button.ToolTip>
+      </Button>
+      <Button>
+        <Button.Content>ToolTip At Bottom</Button.Content>
+        <Button.ToolTip>
+          <ToolTip
+            IsOpen="True"
+            Placement="Bottom"
+            Style="{StaticResource ToolTipStyle}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+              </Grid.RowDefinitions>
+              <TextBlock Grid.Row="0">This is a test tip.</TextBlock>
+              <Button
+                Grid.Row="1"
+                Width="Auto"
+                Height="60">
+                Button in ToolTip.
+              </Button>
+            </Grid>
+          </ToolTip>
+        </Button.ToolTip>
+      </Button>
+    </StackPanel>
+
+    <TextBlock Grid.Row="0" Grid.Column="1">ToolTip Placement Example:</TextBlock>
+
+    <ComboBox
+      x:Name="ToolTipDemonstrator"
+      Grid.Row="1"
+      Grid.Column="1"
+      Width="128"
+      Height="36"
+      VerticalAlignment="Center"
+      VerticalContentAlignment="Center"
+      ItemsSource="{Binding Placements}"
+      SelectedIndex="0">
+      <ComboBox.ToolTip>
+        <ToolTip Placement="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.SelectedValue}" Style="{StaticResource ToolTipStyle}">
+          <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type ToolTip}}, Path=PlacementTarget.SelectedValue, StringFormat=ToolTip Placement: {0}}">
+          </TextBlock>
+        </ToolTip>
+      </ComboBox.ToolTip>
+    </ComboBox>
+  </Grid>
+</UserControl>

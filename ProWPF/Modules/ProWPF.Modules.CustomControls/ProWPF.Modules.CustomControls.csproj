@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <LangVersion>12</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ProWPF.Core\ProWPF.Core.csproj" />
+    <ProjectReference Include="..\..\Services\ProWPF.Services.Interfaces\ProWPF.Services.Interfaces.csproj" />
+  </ItemGroup>
+</Project>
